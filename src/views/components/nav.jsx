@@ -1,21 +1,39 @@
 import React from "react";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function Nav(props) {
+  const movePage = useNavigate();
+
+  function gohome(e) {
+    movePage("/" + e);
+  }
   return (
-    <NavContent>
-      <Link to={"/" + props.webtoonKey} style={{ textDecoration: "none" }}>
-        {props.webtoonKey}
-      </Link>
-    </NavContent>
+    <>
+      <NavContent>WebToon Collect</NavContent>
+      {props.pageKey.map((val, index) => {
+        return (
+          <NavContent
+            key={index}
+            onClick={(_) => {
+              gohome(val);
+            }}
+          >
+            {val}
+          </NavContent>
+        );
+      })}
+    </>
   );
 }
 
 export default Nav;
 
-const NavContent = styled.h1`
+const NavContent = styled.li`
+  margin: 20px;
   display: flex;
-  width: 200px;
   text-decoration: none;
+  &:hover {
+    cursor: pointer;
+  }
 `;

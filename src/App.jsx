@@ -1,25 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 // import WebtoonContent from "./views/components/webtoonContent";
 import Nav from "./views/components/nav";
 import { Route, Routes } from "react-router-dom";
+import WebtoonPage from "./page/webtoonPage";
 
 export default function App() {
-  let webtoonKey = ["all", "naver", "kakao"];
+  let pageKey = ["", "all", "naver", "kakao", "kakaopage"];
   return (
     <Container>
-      <h1>웹툰 모음집</h1>
-      {webtoonKey.map((val, index) => {
-        return (
-          <Nav webtoonKey={val} index={index} key={index}>
-            dd
-          </Nav>
-        );
-      })}
+      <Nav pageKey={pageKey}></Nav>
       <Routes>
-        <Route path={"/"}></Route>
+        <Route path="/" element={<WebtoonPage />} />
+        <Route path="/all" element={<WebtoonPage />} />
+        <Route path="/naver" element={<WebtoonPage />} />
+        <Route path="/kakao" element={<WebtoonPage />} />
+        <Route path="/kakaoPage" element={<WebtoonPage />} />
       </Routes>
-      {/* <WebtoonContent></WebtoonContent> */}
     </Container>
   );
 }
